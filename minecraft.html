@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Minecraft – Descarga Bloqueada</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+
+  <div class="flex items-center justify-center min-h-screen px-4">
+    <div class="bg-gray-800 rounded-2xl shadow-lg p-8 max-w-md text-center">
+      <img src="/img/minecraft.jpg" alt="Minecraft Logo" class="w-24 h-24 mx-auto mb-5">
+      <h2 class="text-2xl font-bold mb-3">🔒 Minecraft v1.21.100.6</h2>
+      <p class="text-gray-400 mb-6">Descargá la versión comprada, lista para jugar sin restricciones.</p>
+
+      <!-- Botones de suscripción -->
+      <a id="btnSub1" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full mb-3 block" 
+         href="https://www.youtube.com/@AssaApps" target="_blank" onclick="marcarClick(this)">
+         📺 Suscribirme al canal Principal
+      </a>
+      <a id="btnSub2" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full mb-3 block" 
+         href="https://www.youtube.com/@AssaAR10" target="_blank" onclick="marcarClick(this)">
+         📺 Suscribirme al canal Secundario
+      </a>
+
+      <!-- Contador -->
+      <p id="contadorTexto" class="text-gray-300 text-lg mb-4 hidden">
+        ⏳ Esperá <span id="contador">20</span> segundos para continuar...
+      </p>
+
+      <!-- Botón de descarga -->
+      <a
+        id="btnDescarga"
+        class="bg-green-600 text-white font-bold py-2 px-6 rounded-full opacity-50 cursor-not-allowed pointer-events-none transition"
+        href="#"
+        target="_blank">
+         Está preparando la descarga…
+      </a>
+    </div>
+  </div>
+
+  <script>
+    let subsClicks = 0; // contador de clics en los botones
+    let contadorActivo = false;
+
+    function marcarClick(btn) {
+      // solo contar el primer clic en cada botón
+      if (!btn.dataset.clicked) {
+        btn.dataset.clicked = "true";
+        subsClicks++;
+      }
+
+      // si ya hicieron click en los 2 botones y el contador no arrancó, iniciamos
+      if (subsClicks >= 2 && !contadorActivo) {
+        iniciarContador();
+      }
+    }
+
+    function iniciarContador() {
+      contadorActivo = true;
+
+      const contadorTexto = document.getElementById("contadorTexto");
+      const contadorSpan = document.getElementById("contador");
+      const btnDescarga = document.getElementById("btnDescarga");
+
+      // deshabilitar botones de suscripción
+      document.querySelectorAll('#btnSub1, #btnSub2').forEach(el => {
+        el.classList.add('opacity-50', 'cursor-not-allowed');
+        el.style.pointerEvents = 'none';
+      });
+
+      contadorTexto.classList.remove("hidden");
+      btnDescarga.innerText = '⌛ Preparando...';
+
+      let tiempo = 20;
+      const intervalo = setInterval(() => {
+        tiempo--;
+        contadorSpan.textContent = tiempo;
+
+        if (tiempo <= 0) {
+          clearInterval(intervalo);
+          contadorTexto.textContent = '✅ ¡Ya podés descargar!';
+          btnDescarga.href = "https://www.mediafire.com/file/51srsowtlykvd1z/Minecraft+v1.21.100.6+[Comprado]-ByAssaAR.apk/file";
+          btnDescarga.innerText = "⬇️ Descargar Minecraft";
+          btnDescarga.classList.remove("opacity-50", "cursor-not-allowed");
+          btnDescarga.classList.add("hover:bg-green-700");
+          btnDescarga.style.pointerEvents = 'auto';
+        }
+      }, 1000);
+    }
+  </script>
+
+</body>
+</html>
+
+

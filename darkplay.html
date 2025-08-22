@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dark Play – Descarga Bloqueada</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #111;
+      color: #fff;
+      padding: 40px;
+    }
+    .box {
+      background: #1e1e1e;
+      padding: 20px;
+      border-radius: 10px;
+      display: inline-block;
+      max-width: 400px;
+      box-shadow: 0px 0px 15px rgba(0,0,0,0.6);
+    }
+    h2 { margin-bottom: 10px; }
+    .logo { width: 120px; margin: 10px auto; }
+    a.button, button.button {
+      display: block;
+      margin: 20px auto;
+      padding: 12px 20px;
+      background: #00aaff;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 8px;
+      transition: 0.3s;
+      cursor: pointer;
+      border: none;
+    }
+    a.button:hover, button.button:hover { background: #0088cc; }
+    .disabled { background: gray; cursor: not-allowed; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <img class="logo" src="/img/darkplay.png" alt="Dark Play Logo">
+    <h2>🔒 Dark Play</h2>
+    <p>Mira series y películas gratis con la última versión de <b>Dark Play</b>.</p>
+    <p>Para acceder a la descarga, primero <b>suscribite</b> a nuestro canal de YouTube.</p>
+
+    <!-- Botones de suscripción -->
+    <a id="btnSub1" class="button" href="https://www.youtube.com/@AssaApps" target="_blank" onclick="marcarClick(this)">
+      📺 Suscribirme al canal Principal
+    </a>
+    <a id="btnSub2" class="button" href="https://www.youtube.com/@AssaAR10" target="_blank" onclick="marcarClick(this)">
+      📺 Suscribirme al canal Secundario
+    </a>
+
+    <!-- Contador -->
+    <p id="contadorTexto" style="display:none; font-size:18px; margin-top:15px;">
+      ⏳ Espera <span id="contador">20</span> segundos para continuar...
+    </p>
+
+    <!-- Botón de descarga -->
+    <a id="btnDescarga" class="button disabled" style="pointer-events: none;" href="#" target="_blank">
+      ✅ Continuar a la descarga
+    </a>
+  </div>
+
+  <script>
+    let subsClicks = 0; // Contador de clics en los botones
+    let contadorActivo = false;
+
+    function marcarClick(btn) {
+      // solo contar el primer clic en cada botón
+      if (!btn.dataset.clicked) {
+        btn.dataset.clicked = "true";
+        subsClicks++;
+      }
+
+      // si ya hicieron click en los 2 botones y el contador no arrancó, iniciamos
+      if (subsClicks >= 2 && !contadorActivo) {
+        iniciarContador();
+      }
+    }
+
+    function iniciarContador() {
+      contadorActivo = true;
+
+      const contadorTexto = document.getElementById("contadorTexto");
+      const contadorSpan = document.getElementById("contador");
+      const btnDescarga = document.getElementById("btnDescarga");
+
+      // deshabilitar botones de suscripción
+      document.querySelectorAll('#btnSub1, #btnSub2').forEach(el => {
+        el.classList.add('disabled');
+        el.style.pointerEvents = 'none';
+      });
+
+      contadorTexto.style.display = "block";
+      btnDescarga.innerText = '⌛ Preparando...';
+
+      let tiempo = 20;
+      const intervalo = setInterval(() => {
+        tiempo--;
+        contadorSpan.textContent = tiempo;
+
+        if (tiempo <= 0) {
+          clearInterval(intervalo);
+          contadorTexto.textContent = "✅ ¡Ya puedes descargar!";
+          btnDescarga.href = "https://dw.malavida.com/d2lNaHJNTFV2NUNBMm1QdXBpSXZla29GYk1xN2JtNU9wWXNMMFI1M1BDMmlXRlY3alBtcHA2V3M0N2hMMndSNFdJMmt1c0QyOEVp/R3I0ZGpDT2doMGtRTTlLcHM5ZXFvNTlJVGFRVyttWjVZeWR0QjJLTUh6UzQ1ajd1TW14aERKYVAycm9VeTVIQ29TdmVHZit2Q1Zs/OE90U0JnZm9RVG9vbWoxK2J4ZnpsaFJDZytZQnVmakRQc1lOY3dVT2xpK0tpQ1ZkclpxZ1RjZFlCOGRKa0Jzek5zWGh2Um5ubisx/TE94ZzZ5YXVPdWo1QWpFNE8vVTRPR3J3V3BJM2E4N1c1REVVeHozSGZOM2E0dFU0Z2FsMW1ieVVMNGRwVVlrdHY1RG1kK0x4Zk9p/STBlRlRGOC8xbmkwc2NDUHJSaE1Gck5OaGluY2NkWStSbHdBOUNZMEU2WmYyUGJXWmZPcGdDdVZhVitaTlR2YXRGbGpvbDZlM1JC/NDljZU9GdGFySEVCN2wrWit0U3ZIVzBMdFZJenY5NFpPUmRZb3pmRUw4ampYSy9YMlRMSmFJU3BiK3dPL3JZQVZYbFNoR3FuS2t2/TWhtcVB4OVJFM2JON0ZlNWhZK2VubDBDWE1jNU9KM0FnMS9NM2RMZHJuUXdPbm11K2krcE1acEVyaTNwaWJJa29jL0ZtT3R0RzZr/M1RQSzhwUVphTjQvbGxhOTJSVnYybEVTbVNKMWduaWFmQ05HWU5vbHBJUkxzOUpDNEVNZ05IbUs2QnZENlk5Skt1WXE0aHhvZz09/";
+          btnDescarga.classList.remove("disabled");
+          btnDescarga.style.pointerEvents = "auto";
+        }
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
+

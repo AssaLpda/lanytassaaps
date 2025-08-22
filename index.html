@@ -7,85 +7,101 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-900 text-white font-sans">
+
   <!-- Header -->
   <header class="bg-gray-800 shadow-md p-4">
     <h1 class="text-2xl font-bold text-center">📲 Centro de Descargas - AssApp's</h1>
     <p class="text-center text-gray-400">Encuentra aquí todas las apps modificadas y premium</p>
+
+    <!-- Buscador -->
+    <div class="mt-4 flex justify-center">
+      <input id="searchInput" type="text" placeholder="Buscar app..." 
+             class="p-2 rounded-xl text-black w-2/3 md:w-1/3" onkeyup="filtrarApps()">
+    </div>
   </header>
 
   <!-- Contenedor principal -->
-  <main class="max-w-4xl mx-auto p-6 grid md:grid-cols-2 gap-6">
-    <!-- Card WhatsApp Plus -->
-    <div class="bg-gray-800 rounded-2xl shadow-lg p-5 flex flex-col items-center">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Plus" class="w-20 h-20 mb-3">
-      <h2 class="text-xl font-semibold mb-2">WhatsApp Plus 21.8.0</h2>
-      <p class="text-gray-400 text-sm text-center">Versión mejorada con más funciones que el WhatsApp oficial.</p>
-      <a href="whatsapp.html" class="mt-4 inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-xl">👉 Descargar</a>
+  <main class="max-w-4xl mx-auto p-6">
+    <div id="cardsContainer" class="grid md:grid-cols-2 gap-6">
+      <!-- Los cards se generarán dinámicamente por JS -->
     </div>
 
-    <!-- Card Minecraft -->
-    <div class="bg-gray-800 rounded-2xl shadow-lg p-5 flex flex-col items-center">
-      <img src="/img/minecraft.jpg" alt="Minecraft" class="w-20 h-20 mb-3">
-      <h2 class="text-xl font-semibold mb-2">Minecraft v1.21</h2>
-      <p class="text-gray-400 text-sm text-center">Juego desbloqueado con todo el contenido premium.</p>
-      <a href="minecraft.html" class="mt-4 inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-xl">👉 Descargar</a>
+    <!-- Paginación -->
+    <div class="flex justify-center mt-6 gap-4">
+      <button id="prevBtn" class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-xl" onclick="cambiarPagina(-1)">⬅️ Anterior</button>
+      <button id="nextBtn" class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-xl" onclick="cambiarPagina(1)">Siguiente ➡️</button>
     </div>
-
-    <!-- Card DarkPlay -->
-    <div class="bg-gray-800 rounded-2xl shadow-lg p-5 flex flex-col items-center">
-      <img src="/img/darkplay.png" alt="DarkPlay" class="w-20 h-20 mb-3">
-      <h2 class="text-xl font-semibold mb-2">DarkPlay</h2>
-      <p class="text-gray-400 text-sm text-center">Mira películas y series en HD gratis, sin anuncios.</p>
-      <a href="darkplay.html" class="mt-4 inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-xl">👉 Descargar</a>
-    </div>
-
-    <!-- Card Amazon -->
-    <div class="bg-gray-800 rounded-2xl shadow-lg p-5 flex flex-col items-center">
-      <img src="/img/amazon.png" alt="DarkPlay" class="w-20 h-20 mb-3">
-      <h2 class="text-xl font-semibold mb-2">Amazon Prime</h2>
-      <p class="text-gray-400 text-sm text-center">Mira películas y series en HD gratis, sin anuncios y varios contenidos desbloqueados.</p>
-      <a href="amazonprime.html" class="mt-4 inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-xl">👉 Descargar</a>
-    </div>
-
-    <!-- Card Spotify -->
-    <div class="bg-gray-800 rounded-2xl shadow-lg p-5 flex flex-col items-center">
-      <img src="/img/spotify.png" alt="DarkPlay" class="w-20 h-20 mb-3">
-      <h2 class="text-xl font-semibold mb-2">Spotify Premium </h2>
-      <p class="text-gray-400 text-sm text-center">Con este mod podras escuchar tu musica favorita sin anuncios</p>
-      <a href="spotifymod.html" class="mt-4 inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-xl">👉 Descargar</a>
-    </div>
-
-    <!-- Card Magis-TV -->
-    <div class="bg-gray-800 rounded-2xl shadow-lg p-5 flex flex-col items-center">
-      <img src="/img/magis.png" alt="DarkPlay" class="w-20 h-20 mb-3">
-      <h2 class="text-xl font-semibold mb-2">MagisTV  para Version AndroidTV </h2>
-      <p class="text-gray-400 text-sm text-center">Mira TV y series/peliculas en VIVO desde tu televisor</p>
-      <a href="magis-tv.html" class="mt-4 inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-xl">👉 Descargar</a>
-    </div>
-
-    <!-- Card Magis-CEL -->
-    <div class="bg-gray-800 rounded-2xl shadow-lg p-5 flex flex-col items-center">
-      <img src="/img/magis.png" alt="DarkPlay" class="w-20 h-20 mb-3">
-      <h2 class="text-xl font-semibold mb-2">MagisTV  para  Android </h2>
-      <p class="text-gray-400 text-sm text-center">Mira series/peliculas favoritas en VIVO desde tu celular</p>
-      <a href="magis-cel.html" class="mt-4 inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-xl">👉 Descargar</a>
-    </div>
-
-    <!-- Card Lightroom -->
-    <div class="bg-gray-800 rounded-2xl shadow-lg p-5 flex flex-col items-center">
-      <img src="/img/Lightroom.png" alt="DarkPlay" class="w-20 h-20 mb-3">
-      <h2 class="text-xl font-semibold mb-2">Lightroom Premium MOD </h2>
-      <p class="text-gray-400 text-sm text-center">Mira series/peliculas favoritas en VIVO desde tu celular</p>
-      <a href="lightroom.html" class="mt-4 inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-xl">👉 Descargar</a>
-    </div>
-
-
-
   </main>
 
   <!-- Footer -->
   <footer class="bg-gray-800 text-center p-4 mt-10">
     <p class="text-gray-500 text-sm">© 2025 AssApp's - Todos los derechos reservados</p>
   </footer>
+
+  <script>
+    // Lista de apps
+    const apps = [
+      { nombre: "WhatsApp Plus 21.8.0", img: "https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg", href: "whatsapp.html", color: "bg-green-600" },
+      { nombre: "Minecraft v1.21", img: "/img/minecraft.jpg", href: "minecraft.html", color: "bg-green-600" },
+      { nombre: "DarkPlay", img: "/img/darkplay.png", href: "darkplay.html", color: "bg-green-600" },
+      { nombre: "Amazon Prime", img: "/img/amazon.png", href: "amazonprime.html", color: "bg-green-600" },
+      { nombre: "Spotify Premium", img: "/img/spotify.png", href: "spotifymod.html", color: "bg-green-600" },
+      { nombre: "MagisTV AndroidTV", img: "/img/magis.png", href: "magis-tv.html", color: "bg-green-600" },
+      { nombre: "MagisTV Android", img: "/img/magis.png", href: "magis-cel.html", color: "bg-green-600" },
+      { nombre: "Lightroom Premium MOD", img: "/img/Lightroom.png", href: "lightroom.html", color: "bg-green-600" },
+      { nombre: "PixelCut Premium MOD", img: "/img/pixelcut.png", href: "pixelcut.html", color: "bg-green-600" },
+      { nombre: "Remini PRO v3.7.1070.2025", img: "/img/remini.png", href: "remini.html", color: "bg-green-600" },
+      { nombre: "AI Photo Enhancer & Upscaler", img: "/img/aiphoto.webp", href: "aiphoto.html", color: "bg-green-600" },
+      { nombre: "Avast CleanUp", img: "/img/avast.avif", href: "avast.html", color: "bg-green-600" },
+      { nombre: "Background Eraser", img: "/img/background.png", href: "background.html", color: "bg-green-600" },
+      { nombre: "CCleaner PRO", img: "/img/CCleaner.png", href: "ccleaner.html", color: "bg-green-600" },
+      // Aquí puedes agregar más apps
+    ];
+
+    const cardsPerPage = 6;
+    let currentPage = 1;
+    let filteredApps = [...apps];
+
+    function mostrarCards() {
+      const container = document.getElementById("cardsContainer");
+      container.innerHTML = "";
+
+      const start = (currentPage - 1) * cardsPerPage;
+      const end = start + cardsPerPage;
+      const appsToShow = filteredApps.slice(start, end);
+
+      appsToShow.forEach(app => {
+        const card = document.createElement("div");
+        card.className = "bg-gray-800 rounded-2xl shadow-lg p-5 flex flex-col items-center";
+        card.innerHTML = `
+          <img src="${app.img}" alt="${app.nombre}" class="w-20 h-20 mb-3">
+          <h2 class="text-xl font-semibold mb-2">${app.nombre}</h2>
+          <a href="${app.href}" class="mt-4 inline-block ${app.color} hover:${app.color.replace("bg-", "bg-")}700 text-white font-bold py-2 px-4 rounded-xl">👉 Descargar</a>
+        `;
+        container.appendChild(card);
+      });
+
+      // Ocultar/mostrar botones si hay más páginas
+      document.getElementById("prevBtn").style.display = currentPage === 1 ? "none" : "inline-block";
+      document.getElementById("nextBtn").style.display = end >= filteredApps.length ? "none" : "inline-block";
+    }
+
+    function cambiarPagina(direccion) {
+      currentPage += direccion;
+      mostrarCards();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function filtrarApps() {
+      const query = document.getElementById("searchInput").value.toLowerCase();
+      filteredApps = apps.filter(app => app.nombre.toLowerCase().includes(query));
+      currentPage = 1;
+      mostrarCards();
+    }
+
+    // Inicializar
+    mostrarCards();
+  </script>
+
 </body>
 </html>

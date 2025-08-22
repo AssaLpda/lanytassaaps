@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Centro de Descargas - AssApp's</title>
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
 </head>
 <body class="bg-gray-900 text-white font-sans">
 
@@ -12,6 +16,9 @@
   <header class="bg-gray-800 shadow-md p-4">
     <h1 class="text-2xl font-bold text-center">📲 Centro de Descargas - AssApp's</h1>
     <p class="text-center text-gray-400">Encuentra aquí todas las apps modificadas y premium</p>
+
+    <!-- Contador de visitantes -->
+    <p id="visitante" class="text-center text-gray-300 mt-2">Visitante N° ...</p>
 
     <!-- Buscador -->
     <div class="mt-4 flex justify-center">
@@ -39,6 +46,29 @@
   </footer>
 
   <script>
+    // Configuración Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyA2dY3U0RGwSEwGWy3Dad-oH7HERq5WIpM",
+      authDomain: "assappscontador.firebaseapp.com",
+      databaseURL: "https://assappscontador-default-rtdb.firebaseio.com",
+      projectId: "assappscontador",
+      storageBucket: "assappscontador.firebasestorage.app",
+      messagingSenderId: "783516865291",
+      appId: "1:783516865291:web:92cb24a09480473f1d080e"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+    const contadorRef = db.ref("visitantes");
+
+    // Incrementar contador al ingresar
+    contadorRef.transaction(current => (current || 0) + 1);
+
+    // Mostrar contador en tiempo real
+    contadorRef.on("value", snapshot => {
+      const valor = snapshot.val() || 0;
+      document.getElementById("visitante").innerText = `Visitante N° ${valor}`;
+    });
+
     // Lista de apps
     const apps = [
       { nombre: "WhatsApp Plus 21.8.0", img: "https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg", href: "whatsapp.html", color: "bg-green-600" },
@@ -54,8 +84,7 @@
       { nombre: "AI Photo Enhancer & Upscaler", img: "/img/aiphoto.webp", href: "aiphoto.html", color: "bg-green-600" },
       { nombre: "Avast CleanUp", img: "/img/avast.avif", href: "avast.html", color: "bg-green-600" },
       { nombre: "Background Eraser", img: "/img/background.png", href: "background.html", color: "bg-green-600" },
-      { nombre: "CCleaner PRO", img: "/img/CCleaner.png", href: "ccleaner.html", color: "bg-green-600" },
-      // Aquí puedes agregar más apps
+      { nombre: "CCleaner PRO", img: "/img/CCleaner.png", href: "ccleaner.html", color: "bg-green-600" }
     ];
 
     const cardsPerPage = 6;
@@ -81,7 +110,6 @@
         container.appendChild(card);
       });
 
-      // Ocultar/mostrar botones si hay más páginas
       document.getElementById("prevBtn").style.display = currentPage === 1 ? "none" : "inline-block";
       document.getElementById("nextBtn").style.display = end >= filteredApps.length ? "none" : "inline-block";
     }
@@ -99,9 +127,9 @@
       mostrarCards();
     }
 
-    // Inicializar
     mostrarCards();
   </script>
 
 </body>
 </html>
+

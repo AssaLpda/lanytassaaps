@@ -3,19 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dark Play – Descarga Bloqueada</title>
+  <title>OnBoard Memory Manager (Logitech) – Descarga Bloqueada</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-900 text-white font-sans">
-
   <div class="flex items-center justify-center min-h-screen px-4">
     <div class="bg-gray-800 rounded-2xl shadow-lg p-8 max-w-md text-center">
-      <img src="/img/darkplay.png" alt="Dark Play Logo" class="w-24 h-24 mx-auto mb-5">
-      <h2 class="text-2xl font-bold mb-3">🔒 Dark Play v1.0</h2>
-      <p class="text-gray-400 mb-6">Mira series y películas gratis con la última versión de <b>Dark Play</b>.</p>
-      <p class="text-gray-400 mb-6">Para acceder a la descarga, primero <b>suscribite</b> a nuestro canal de YouTube.</p>
+      <img src="https://www.logitech.com/assets/65549/lg-hub-logo.png" alt= "Logitech Logo" class="w-24 h-24 mx-auto mb-5">
+      <h2 class="text-2xl font-bold mb-3">🔒 OnBoard Memory Manager (Logitech)</h2>
+      <p class="text-gray-400 mb-6">Instalá el programa oficial de Logitech para gestionar la memoria integrada de tus periféricos.</p>
 
-      <!-- Botón de suscripción principal -->
+     <!-- Botón de suscripción principal -->
       <a id="btnSub1" href="https://www.youtube.com/@AssaApps" target="_blank"
          onclick="registrarSuscripcion()"
          class="flex items-center justify-center gap-2 bg-blue-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full mb-3">
@@ -49,18 +47,14 @@
       </p>
 
       <!-- Botón de descarga -->
-      <a id="btnDescarga"
-         class="bg-green-600 text-white font-bold py-2 px-6 rounded-full opacity-50 cursor-not-allowed pointer-events-none transition"
-         href="#"
-         target="_blank">
-         Está preparando la descarga…
+      <a id="btnDescarga" class="bg-green-600 text-white font-bold py-2 px-6 rounded-full opacity-50 cursor-not-allowed pointer-events-none transition" href="#" target="_blank">
+        Está preparando la descarga…
       </a>
     </div>
   </div>
 
   <script>
     let subsClicks = 0;
-
     function registrarSuscripcion() {
       subsClicks++;
       if (subsClicks >= 2) {
@@ -86,12 +80,11 @@
       const intervalo = setInterval(() => {
         tiempo--;
         contadorSpan.textContent = tiempo;
-
         if (tiempo <= 0) {
           clearInterval(intervalo);
           contadorTexto.textContent = '✅ ¡Ya podés descargar!';
-          btnDescarga.href = "https://srtslug.biz/8b9Gc";
-          btnDescarga.innerText = "⬇️ Descargar Dark Play";
+          btnDescarga.href = "https://ranoz.gg/file/m8Kip40v";
+          btnDescarga.innerText = "⬇️ Descargar OnBoard Memory Manager (Logitech)";
           btnDescarga.classList.remove("opacity-50", "cursor-not-allowed");
           btnDescarga.classList.add("hover:bg-green-700");
           btnDescarga.style.pointerEvents = 'auto';
@@ -99,8 +92,5 @@
       }, 1000);
     }
   </script>
-
 </body>
 </html>
-
-

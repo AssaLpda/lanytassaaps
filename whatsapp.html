@@ -16,7 +16,7 @@
 
       <!-- Botón de suscripción principal -->
       <a id="btnSub1" href="https://www.youtube.com/@AssaApps" target="_blank"
-         onclick="registrarSuscripcion()"
+         onclick="registrarSuscripcion(this)"
          class="flex items-center justify-center gap-2 bg-blue-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full mb-3">
         <!-- Icono YouTube -->
         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6">
@@ -30,7 +30,7 @@
 
       <!-- Botón de suscripción secundario -->
       <a id="btnSub2" href="https://www.youtube.com/@AssaAR10" target="_blank"
-         onclick="registrarSuscripcion()"
+         onclick="registrarSuscripcion(this)"
          class="flex items-center justify-center gap-2 bg-blue-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full mb-3">
         <!-- Icono YouTube -->
         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6">
@@ -58,17 +58,17 @@
   </div>
 
   <script>
-    let subsClicks = 0; // Contador de clics en los botones
+    let subsClicks = 0; 
     let contadorActivo = false;
 
-    function marcarClick(btn) {
-      // solo contar el primer clic en cada botón
+    function registrarSuscripcion(btn) {
+      // contar solo el primer clic en cada botón
       if (!btn.dataset.clicked) {
         btn.dataset.clicked = "true";
         subsClicks++;
       }
 
-      // si ya hicieron click en los 2 botones y el contador no arrancó, iniciamos
+      // si ya clickeó en los 2 botones y no arrancó el contador → iniciar
       if (subsClicks >= 2 && !contadorActivo) {
         iniciarContador();
       }
@@ -81,9 +81,9 @@
       const contadorSpan = document.getElementById("contador");
       const btnDescarga = document.getElementById("btnDescarga");
 
-      // deshabilitar botones de suscripción
+      // deshabilitar botones
       document.querySelectorAll('#btnSub1, #btnSub2').forEach(el => {
-        el.classList.add('opacity-50');
+        el.classList.add('opacity-50', 'cursor-not-allowed');
         el.style.pointerEvents = 'none';
       });
 
@@ -110,3 +110,5 @@
 
 </body>
 </html>
+
+
